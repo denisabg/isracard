@@ -1,0 +1,40 @@
+<h1>Searching on GIT repositories</h1>
+<div class="table-responsive" >
+  <input #searchString
+         (keyup.enter)="searchBy(searchString.value); searchString.value=''" />
+  <button (click)="searchBy(searchString.value); searchString.value=''">Get Data</button>
+
+  <table class="table" *ngIf="items && items.length; else falsyTemplate">
+    <thead>
+      <tr>
+        <th>Repository Name</th>
+        <th>Avatar</th>
+        <th>Book Item</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of items">
+        <td>{{item.repositorytName}}</td>
+        <td>
+          <img [src]='item.avatarUrl'
+               [style.width.px]="40"
+               [style.margin.px]="2"
+               [title]="item.repositorytName" />
+        </td>
+        <td>
+          <button class='btn btn-primary'
+                   [style.width.px]="80"
+                  (click)="bookMark(item)">
+            {{item.isChecked?'unbook':'book'}}
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<ng-template #falsyTemplate>
+  <h3>No Recordes were found!!</h3>
+</ng-template>
+
